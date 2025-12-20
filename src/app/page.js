@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 const page = () => {
   const router = useRouter()
   const { user } = useAuthContext()
-  
+
   useEffect(() => {
     if (user != null) {
       user.getIdTokenResult().then((idTokenResult) => {
@@ -53,7 +53,7 @@ const page = () => {
             </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-            Streamline your course enrollment process with our modern, intuitive platform. 
+            Streamline your course enrollment process with our modern, intuitive platform.
             Manage courses, track enrollments, and visualize data in real-time.
           </p>
           <div className="flex gap-4 justify-center">
@@ -73,7 +73,7 @@ const page = () => {
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-3 gap-8 mt-20">
-          <div className="card bg-white shadow-xl hover:shadow-2xl transition-shadow">
+          <div className="card bg-white/70 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow border border-white/20">
             <div className="card-body">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,7 +87,7 @@ const page = () => {
             </div>
           </div>
 
-          <div className="card bg-white shadow-xl hover:shadow-2xl transition-shadow">
+          <div className="card bg-white/70 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow border border-white/20">
             <div className="card-body">
               <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,7 +101,7 @@ const page = () => {
             </div>
           </div>
 
-          <div className="card bg-white shadow-xl hover:shadow-2xl transition-shadow">
+          <div className="card bg-white/70 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow border border-white/20">
             <div className="card-body">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,19 +117,19 @@ const page = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-20 bg-white rounded-2xl shadow-xl p-8">
+        <div className="mt-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-xl p-8">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">6+</div>
-              <div className="text-gray-600">Available Courses</div>
+              <div className="text-4xl font-bold text-white mb-2">6+</div>
+              <div className="text-blue-100">Available Courses</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-indigo-600 mb-2">100%</div>
-              <div className="text-gray-600">Secure Platform</div>
+              <div className="text-4xl font-bold text-white mb-2">100%</div>
+              <div className="text-blue-100">Secure Platform</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">24/7</div>
-              <div className="text-gray-600">Access Anytime</div>
+              <div className="text-4xl font-bold text-white mb-2">24/7</div>
+              <div className="text-blue-100">Access Anytime</div>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ const page = () => {
       <footer className="bg-white mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-600">
-            <p>© 2025 SEIS - Student Enrollment Information System. All rights reserved.</p>
+            <p>© 2023-2025 SEIS - Student Enrollment Information System. All rights reserved.</p>
           </div>
         </div>
       </footer>
