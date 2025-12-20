@@ -1,17 +1,26 @@
 # SEIS - Student Enrollment Information System
 
-A modern web application for managing student enrollment, built with Next.js and Firebase.
+A web-based platform for managing student course enrollments and tracking enrollment analytics.
+
+## Overview
+
+SEIS is a Next.js application that provides separate interfaces for students and administrators. Students can enroll in courses and set up alerts, while administrators can view enrollment data through interactive visualizations.
 
 ## Features
 
-- 🔐 User Authentication (Email/Password)
-- 👥 User and Admin Dashboards
-- 📊 Course Enrollment Management
-- 🔔 Alert System
-- 📈 Data Visualization with D3.js
-- 🎨 Modern UI with Tailwind CSS and DaisyUI
+### For Students
+- Enroll in up to 3 courses per semester
+- Set up course alerts for notifications
+- View and manage current enrollments
+- Track enrollment status
 
-## Tech Stack
+### For Administrators
+- View enrollment analytics across all courses
+- Interactive data visualizations with D3.js
+- Real-time enrollment tracking
+- Course management dashboard
+
+## Technology Stack
 
 - **Frontend**: Next.js 16, React 19
 - **Backend**: Firebase (Authentication, Firestore)
@@ -23,73 +32,74 @@ A modern web application for managing student enrollment, built with Next.js and
 ### Prerequisites
 
 - Node.js 18 or higher
-- Firebase account
+- Firebase account with a configured project
 - npm or yarn
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/SEIS.git
+git clone https://github.com/kishorep26/SEIS.git
 cd SEIS
 ```
 
-2. Install dependencies:
+2. Install dependencies
 ```bash
 npm install
 ```
 
-3. Set up environment variables:
-Create a `.env.local` file in the root directory with your Firebase configuration:
+3. Configure environment variables
+
+Create a `.env.local` file in the root directory:
+
 ```env
-NEXT_PUBLIC_apiKey=your-api-key
+NEXT_PUBLIC_apiKey=your-firebase-api-key
 NEXT_PUBLIC_authDomain=your-auth-domain
 NEXT_PUBLIC_projectId=your-project-id
 NEXT_PUBLIC_storageBucket=your-storage-bucket
 NEXT_PUBLIC_messagingSenderId=your-messaging-sender-id
 NEXT_PUBLIC_appId=your-app-id
-NEXT_PUBLIC_collection=your-collection-name
+NEXT_PUBLIC_collection=your-enrollment-collection
 NEXT_PUBLIC_collection_alerts=your-alerts-collection
 NEXT_PUBLIC_collection_summaire=your-summaries-collection
 ```
 
-4. Run the development server:
+4. Run the development server
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
-
-## Project Structure
-
-```
-SEIS/
-├── src/
-│   ├── app/              # Next.js App Router pages
-│   ├── context/          # React Context providers
-│   └── firebase/         # Firebase configuration and utilities
-├── public/               # Static assets
-├── firebase-functions/   # Firebase Cloud Functions
-└── ...
-```
-
-## Deployment
-
-This application is designed to be deployed on Vercel with Firebase as the backend.
-
-### Deploy to Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/SEIS)
-
-Make sure to add all required environment variables in your Vercel project settings.
+Access the application at `http://localhost:3000`
 
 ## Firebase Setup
 
-1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
-2. Enable Authentication (Email/Password)
-3. Create a Firestore database
-4. Create the required collections
-5. Copy your Firebase configuration to `.env.local`
+### Required Services
+
+1. **Authentication**: Enable Email/Password authentication
+2. **Firestore Database**: Create three collections:
+   - Enrollment collection (for course enrollments)
+   - Alerts collection (for course alerts)
+   - Summaries collection (for enrollment analytics)
+
+### Firestore Structure
+
+Each collection should contain documents with course IDs as document names. The enrollment and alerts collections start empty, while the summaries collection requires date fields with enrollment counts for visualization.
+
+## Deployment
+
+The application is designed to be deployed on Vercel. Ensure all environment variables are configured in your Vercel project settings before deployment.
+
+## User Roles
+
+### Student Account
+- Access to course enrollment
+- Alert management
+- Personal dashboard
+
+### Administrator Account
+- Access to analytics dashboard
+- Enrollment data visualization
+- Course overview
 
 ## License
 
