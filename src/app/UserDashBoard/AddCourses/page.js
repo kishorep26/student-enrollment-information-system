@@ -1,12 +1,13 @@
 'use client'
-import {useState,useEffect,useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import '../../globals.css'
 import NavBar from '../NavBar'
 import { useAuthContext } from '@/src/context/AuthContext'
 import { useRouter } from 'next/navigation'
 import getalldocs from '@/src/firebase/firestore/getalldocs'
 import addDataseis from '@/src/firebase/firestore/adddata'
-const page = () => {
+
+const AddCourses = () => {
   const [data, setdata] = useState('')
   const { user } = useAuthContext()
   const router = useRouter()
@@ -14,7 +15,9 @@ const page = () => {
   const isFirstRender = useRef(true)
   const [op, setop] = useState(false)
   const [enrolled, setenrolled] = useState(false)
+  const [loading, setLoading] = useState(false)
   const count = useRef(0)
+
   useEffect(() => {
     if (isFirstRender) {
       isFirstRender.current = false
@@ -25,7 +28,6 @@ const page = () => {
           } else {
             getalldocs(user.uid).then((result, error) => {
               if (result) {
-                console.log(result.send, 'heheh result at getdocsallbyuid')
                 count.current = result.send.pop()
                 opts.current = result.send
                 setop(true)
@@ -43,57 +45,122 @@ const page = () => {
       }
     }
   }, [user, enrolled])
+
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       <NavBar pagename={'Add Courses'} />
-      <br />
-      <div className='prose flex items-center justify-center text-xl normal-case'>
-        Search & Enroll into Courses using Class ID (You can Enroll into a
-        maximum of 3 courses!)
-      </div>
-      <br />
-      <br />
-      <div className='join prose flex items-center justify-center text-xl normal-case'>
-        <select
-          className='select join-item select-bordered w-full max-w-xs'
-          defaultValue={'Choose a Course'}
-          onChange={(e) => setdata(e.target.value)}
-        >
-          <option disabled>Choose a Course</option>
-          {op &&
-            opts.current.map((ele) => {
-              return <option key={ele}> {ele}</option>
-            })}
-        </select>
-        <button
-          className='btn join-item rounded-r-full'
-          onClick={(e) => {
-            if (data !== '' && user != null) {
-              addDataseis(user.uid, data).then((result, error) => {
-                if (result) {
-                  console.log(result, 'adddeddd hehehe')
-                  setenrolled(true)
-                  alert('enrollment successful')
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header Section */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-8 mb-8 border border-white/20">
+          <div className="flex items-center mb-4">
+            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Add Courses</h1>
+              <p className="text-gray-600">Enroll in courses for the upcoming semester</p>
+            </div>
+          </div>
+
+          <div className="alert alert-info">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>You can enroll in a maximum of 3 courses. Currently enrolled: {count.current}/3</span>
+          </div>
+        </div>
+
+        {/* Course Selection Section */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-8 border border-white/20">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Select a Course</h2>
+
+          <div className="space-y-6">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-medium">Available Courses</span>
+                <span className="label-text-alt">{opts.current.length} courses available</span>
+              </label>
+              <select
+                className="select select-bordered w-full focus:select-primary"
+                defaultValue={'Choose a Course'}
+                onChange={(e) => setdata(e.target.value)}
+              >
+                <option disabled>Choose a Course</option>
+                {op &&
+                  opts.current.map((ele) => {
+                    return <option key={ele}>{ele}</option>
+                  })}
+              </select>
+            </div>
+
+            <button
+              className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
+              onClick={(e) => {
+                if (data !== '' && data !== 'Choose a Course' && user != null) {
+                  setLoading(true)
+                  addDataseis(user.uid, data).then((result, error) => {
+                    if (result) {
+                      setenrolled(true)
+                      alert('Enrollment successful!')
+                      router.replace('/UserDashBoard')
+                    } else {
+                      setLoading(false)
+                      alert('Enrollment failed. Please try again.')
+                    }
+                  })
+                } else if (data === '' || data === 'Choose a Course') {
+                  alert('Please select a course first')
+                } else {
+                  alert('You have reached the registration limit')
                   router.replace('/UserDashBoard')
                 }
-              })
-              console.log(data)
-            } else {
-              alert('You have reached Registration limit')
-              router.replace('/UserDashBoard')
-            }
-          }}
-        >
-          Enroll
-        </button>
-      </div>
-      <br />
-      <br />
-      <div className='prose flex items-center justify-center text-xl normal-case'>
-        {enrolled && <p>Enrolled into '{data}'</p>}
+              }}
+              disabled={loading}
+            >
+              {loading ? 'Enrolling...' : 'Enroll in Course'}
+            </button>
+
+            {enrolled && (
+              <div className="alert alert-success">
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Successfully enrolled in '{data}'</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Help Section */}
+        <div className="mt-8 bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+          <h3 className="font-semibold text-gray-900 mb-3">Need Help?</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li className="flex items-start">
+              <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Select a course from the dropdown menu
+            </li>
+            <li className="flex items-start">
+              <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Click "Enroll in Course" to complete enrollment
+            </li>
+            <li className="flex items-start">
+              <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              You can drop courses from your dashboard
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   )
 }
 
-export default page
+export default AddCourses
