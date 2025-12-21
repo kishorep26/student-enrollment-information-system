@@ -4,7 +4,7 @@ import { AuthContextProvider } from '@/src/context/AuthContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'SEIS',
+  title: 'Student Enrollment Information System',
   description: 'Student Enrollment Information System',
 }
 
