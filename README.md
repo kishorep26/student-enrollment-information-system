@@ -91,4 +91,18 @@ Each collection should contain documents with course IDs as document names. The 
 
 ## Deployment
 
+### Vercel Deployment
+
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Configure environment variables in Vercel dashboard
+4. Deploy automatically on push to main branch
+
+### Environment Variables Required
+
+- `NEXT_PUBLIC_apiKey`: Firebase API key
+- `NEXT_PUBLIC_authDomain`: Firebase auth domain
+- `NEXT_PUBLIC_projectId`: Firebase project ID
+- Additional Firebase configuration variables
+
 The application is optimized for deployment on Vercel. Ensure all environment variables are properly configured in your Vercel project settings before deployment.
