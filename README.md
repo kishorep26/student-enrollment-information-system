@@ -1,6 +1,6 @@
 # Student Enrollment Information System (SEIS)
 
-[![Vercel](https://img.shields.io/badge/Vercel-Deployed-brightgreen?logo=vercel)](https://seis-beta.vercel.app) [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Release](https://img.shields.io/github/v/release/kishorep26/student-enrollment-information-system)](https://github.com/kishorep26/student-enrollment-information-system/releases)
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-brightgreen?logo=vercel)](https://seis-beta.vercel.app) [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Release](https://img.shields.io/github/v/release/kishorep26/student-enrollment-information-system)](https://github.com/kishorep26/student-enrollment-information-system/releases) [![CI](https://github.com/kishorep26/student-enrollment-information-system/workflows/CI/badge.svg)](https://github.com/kishorep26/student-enrollment-information-system/actions)
 
 A comprehensive web-based platform for managing student course enrollments with real-time analytics and administrative oversight.
 
