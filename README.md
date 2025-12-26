@@ -1,46 +1,45 @@
-# SEIS - Student Enrollment Information System
+# Student Enrollment Information System (SEIS)
 
-A web-based platform for managing student course enrollments and tracking enrollment analytics.
+A comprehensive web-based platform for managing student course enrollments with real-time analytics and administrative oversight.
 
 ## Overview
 
-SEIS is a Next.js application that provides separate interfaces for students and administrators. Students can enroll in courses and set up alerts, while administrators can view enrollment data through interactive visualizations.
+SEIS is a Next.js application that streamlines the course enrollment process for educational institutions. The platform features role-based access control with distinct interfaces for students and administrators, enabling efficient enrollment management and data-driven decision making through interactive analytics.
 
-## Features
+## Key Features
 
-### For Students
-- Enroll in up to 3 courses per semester
-- Set up course alerts for notifications
-- View and manage current enrollments
-- Track enrollment status
+**Student Interface**
+- Course enrollment management with semester-based enrollment caps (maximum 3 courses)
+- Customizable course alert notifications
+- Real-time enrollment status tracking
+- Personal enrollment dashboard with course overview
 
-### For Administrators
-- View enrollment analytics across all courses
-- Interactive data visualizations with D3.js
-- Real-time enrollment tracking
-- Course management dashboard
+**Administrator Interface**
+- Comprehensive enrollment analytics across all courses
+- Interactive data visualizations powered by D3.js
+- Real-time enrollment monitoring and reporting
+- Administrative dashboard with course management capabilities
 
 ## Technology Stack
 
 - **Frontend**: Next.js 16, React 19
-- **Backend**: Firebase (Authentication, Firestore)
+- **Backend**: Firebase (Authentication, Firestore Database)
 - **Styling**: Tailwind CSS, DaisyUI
 - **Data Visualization**: D3.js
+- **Deployment**: Vercel
 
-## Getting Started
-
-### Prerequisites
+## Prerequisites
 
 - Node.js 18 or higher
-- Firebase account with a configured project
-- npm or yarn
+- Firebase account with configured project
+- npm or yarn package manager
 
-### Installation
+## Installation
 
 1. Clone the repository
 ```bash
-git clone https://github.com/kishorep26/SEIS.git
-cd SEIS
+git clone https://github.com/kishorep26/student-enrollment-information-system.git
+cd student-enrollment-information-system
 ```
 
 2. Install dependencies
@@ -51,7 +50,6 @@ npm install
 3. Configure environment variables
 
 Create a `.env.local` file in the root directory:
-
 ```env
 NEXT_PUBLIC_apiKey=your-firebase-api-key
 NEXT_PUBLIC_authDomain=your-auth-domain
@@ -71,40 +69,20 @@ npm run dev
 
 Access the application at `http://localhost:3000`
 
-## Firebase Setup
+## Firebase Configuration
 
 ### Required Services
 
-1. **Authentication**: Enable Email/Password authentication
-2. **Firestore Database**: Create three collections:
-   - Enrollment collection (for course enrollments)
-   - Alerts collection (for course alerts)
-   - Summaries collection (for enrollment analytics)
+1. **Authentication**: Enable Email/Password authentication method
+2. **Firestore Database**: Create three collections with the following structure:
 
-### Firestore Structure
+**Collections Structure:**
+- **Enrollment Collection**: Stores student course enrollments (course IDs as document names)
+- **Alerts Collection**: Manages course notification preferences
+- **Summaries Collection**: Contains date-based enrollment counts for analytics visualization
 
-Each collection should contain documents with course IDs as document names. The enrollment and alerts collections start empty, while the summaries collection requires date fields with enrollment counts for visualization.
+Each collection should contain documents with course IDs as document names. The enrollment and alerts collections start empty, while the summaries collection requires date fields with enrollment counts for visualization purposes.
 
 ## Deployment
 
-The application is designed to be deployed on Vercel. Ensure all environment variables are configured in your Vercel project settings before deployment.
-
-## User Roles
-
-### Student Account
-- Access to course enrollment
-- Alert management
-- Personal dashboard
-
-### Administrator Account
-- Access to analytics dashboard
-- Enrollment data visualization
-- Course overview
-
-## License
-
-This project is private and proprietary.
-
-## Author
-
-Kishore Prashanth
+The application is optimized for deployment on Vercel. Ensure all environment variables are properly configured in your Vercel project settings before deployment.
