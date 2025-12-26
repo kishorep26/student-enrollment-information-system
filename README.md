@@ -30,6 +30,10 @@ SEIS is a Next.js application that streamlines the course enrollment process for
 - **Data Visualization**: D3.js
 - **Deployment**: Vercel
 
+- ## Screenshots
+
+![SEIS Dashboard](https://htbuikuqbwstckwscktq.supabase.co/storage/v1/object/public/images/projects/SEIS.png)
+
 ## Prerequisites
 
 - Node.js 18 or higher
